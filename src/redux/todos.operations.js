@@ -9,6 +9,12 @@ import {
   fetchTodosRequest,
   fetchTodosSuccess,
   fetchTodosError,
+  fetchTodosBiIdRequest,
+  fetchTodosByIdSuccess,
+  fetchTodosByIdError,
+  fetchChangeTodosRequest,
+  fetchChangeTodosSuccess,
+  fetchChangeTodosError,
 } from "./todos.actions";
 
 axios.defaults.baseURL = "https://jsonplaceholder.typicode.com";
@@ -19,7 +25,6 @@ const fetchTodos = () => async (dispatch) => {
 
   try {
     const { data } = await axios.get("/posts");
-    console.log(data);
 
     dispatch(fetchTodosSuccess(data.splice(0, 10)));
   } catch (error) {
@@ -53,11 +58,31 @@ const deleteTodo = (todoId) => (dispatch) => {
     .catch((error) => dispatch(deleteTodoError(error.message)));
 };
 
-// PATCH @ /tasks/:id
+const fetchTodoById = (todoId) => (dispatch) => {
+  dispatch(fetchTodosBiIdRequest());
+
+  axios
+    .get(`/posts/1`)
+    .then(({ data }) => {
+      dispatch(fetchTodosByIdSuccess(data));
+    })
+    .catch((error) => dispatch(fetchTodosByIdError(error.message)));
+};
+
+const fetchChangeItem = (title, body) => (dispatch) => {
+  dispatch(fetchChangeTodosRequest());
+
+  axios
+    .put(`/posts/1`, { id: 1, title: title, body: body })
+    .then((response) => response.json())
+    .then((json) => console.log("json", json));
+};
 
 const todosOperations = {
   fetchTodos,
   addTodo,
   deleteTodo,
+  fetchTodoById,
+  fetchChangeItem,
 };
 export default todosOperations;

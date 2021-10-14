@@ -40,7 +40,7 @@ function TodoEditor() {
           value={body}
           onChange={getBodyTodo}
           placeholder="Your text"
-        ></input>
+        />
 
         <button type="submit" className={styles.button}>
           Сохранить

@@ -4,6 +4,7 @@ import {
   addTodoSuccess,
   deleteTodoSuccess,
   fetchTodosSuccess,
+  fetchTodosByIdSuccess,
 } from "./todos.actions";
 
 const items = createReducer([], {
@@ -13,6 +14,11 @@ const items = createReducer([], {
     state.filter(({ id }) => id !== payload),
 });
 
+const itemById = createReducer([], {
+  [fetchTodosByIdSuccess]: (_, { payload }) => payload,
+});
+
 export default combineReducers({
   items,
+  itemById,
 });

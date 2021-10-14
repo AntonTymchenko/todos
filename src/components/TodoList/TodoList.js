@@ -12,7 +12,6 @@ export default function TodoList() {
   return (
     <ul className={styles.list}>
       {todos.map(({ id, body, title, idNew }) => {
-        console.log("id", id);
         return (
           <li key={idNew || id} className={styles.item}>
             <Todo title={title} text={body} onDelete={() => onDeleteTodo(id)} />
