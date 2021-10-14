@@ -5,6 +5,7 @@ import styles from "./TodoList.module.css";
 
 export default function TodoList() {
   const dispatch = useDispatch();
+
   const todos = useSelector((state) => state.todos.items);
 
   const onDeleteTodo = (id) => dispatch(todosOperations.deleteTodo(id));

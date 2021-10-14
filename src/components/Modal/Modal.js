@@ -30,7 +30,7 @@ export default class Modal extends Component {
     return createPortal(
       <div className={styles.backdrop} onClick={this.handleBackdropClick}>
         <div className={styles.content}>
-          <FromForChangeItem />
+          <FromForChangeItem onClose={this.props.onClose} />
         </div>
       </div>,
       modalRoot

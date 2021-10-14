@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import todosOperations from "../../redux/todos.operations";
 import styles from "./FromForChangeItem.module.css";
+import { statusModal } from "../../redux/todos.actions";
 
-export function FromForChangeItem() {
+export function FromForChangeItem({ onClose }) {
   const dispatch = useDispatch();
   const { title, body } = useSelector((state) => state.todos.itemById);
 
@@ -14,17 +15,19 @@ export function FromForChangeItem() {
     dispatch(todosOperations.fetchTodoById(1));
     setTitleChange(title);
     setBodyChange(body);
-  }, [title]);
+  }, [title, body]);
 
   const getChangeTitle = (e) => {
-    console.log(e.target.value);
     setTitleChange(e.target.value);
   };
   const getBodyTodo = (e) => {
     setBodyChange(e.target.value);
   };
-  const changeItemSubmit = () => {
+  const changeItemSubmit = (e) => {
+    e.preventDefault();
     dispatch(todosOperations.fetchChangeItem(titleChange, bodyChange));
+    dispatch(statusModal(false));
+    onClose();
   };
   return (
     <div>

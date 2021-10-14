@@ -71,11 +71,23 @@ const fetchTodoById = (todoId) => (dispatch) => {
 
 const fetchChangeItem = (title, body) => (dispatch) => {
   dispatch(fetchChangeTodosRequest());
-
-  axios
-    .put(`/posts/1`, { id: 1, title: title, body: body })
-    .then((response) => response.json())
-    .then((json) => console.log("json", json));
+  fetch("https://jsonplaceholder.typicode.com/posts/1", {
+    method: "PUT",
+    body: JSON.stringify({
+      id: 1,
+      title: title,
+      body: body,
+      userId: 1,
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  })
+    .then((response) => {
+      dispatch(fetchTodosSuccess());
+      return response.json();
+    })
+    .then((json) => console.log(json));
 };
 
 const todosOperations = {

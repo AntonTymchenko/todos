@@ -5,6 +5,8 @@ import {
   deleteTodoSuccess,
   fetchTodosSuccess,
   fetchTodosByIdSuccess,
+  statusModal,
+  fetchChangeTodosSuccess,
 } from "./todos.actions";
 
 const items = createReducer([], {
@@ -18,7 +20,19 @@ const itemById = createReducer([], {
   [fetchTodosByIdSuccess]: (_, { payload }) => payload,
 });
 
+const isModalOpen = createReducer(false, {
+  [statusModal]: (_, { payload }) => payload,
+});
+const change = createReducer(
+  {},
+  {
+    [fetchChangeTodosSuccess]: (state, { payload }) => state,
+  }
+);
+
 export default combineReducers({
   items,
   itemById,
+  isModalOpen,
+  change,
 });

@@ -1,12 +1,21 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { statusModal } from "../../redux/todos.actions";
 import Modal from "../Modal/Modal";
 import styles from "./Todo.module.css";
 
 export default function Todo({ text, onDelete, title }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const toggleModal = () => setIsModalOpen((state) => !state);
+  const dispatch = useDispatch();
 
+  const isModalStatus = useSelector((state) => state.todos.isModalOpen);
+
+  const toggleModal = () => {
+    dispatch(statusModal(isModalOpen));
+    // console.log("isModalStatus", isModalStatus);
+    // console.log("isModalOpen", isModalOpen);
+    setIsModalOpen((state) => !state);
+  };
   return (
     <>
       <div className={styles.titleText}>

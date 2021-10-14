@@ -29,3 +29,5 @@ export const fetchChangeTodosSuccess = createAction(
 export const fetchChangeTodosError = createAction(
   "todos/fetchChangeTodosError"
 );
+
+export const statusModal = createAction("modal/status");
